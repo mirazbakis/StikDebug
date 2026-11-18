@@ -229,6 +229,9 @@ struct KillProcessIntent: AppIntent {
         let targetName: String
 
         if let pid {
+            guard pid > 0, pid <= Int(Int32.max) else {
+                return .result(value: "\(pid) is not a valid PID.")
+            }
             targetPID = pid
             targetName = "PID \(pid)"
             await ensureTunnel()

@@ -239,8 +239,8 @@ struct HomeView: View {
         switch host {
         case "enable-jit":
             var config = JITEnableConfiguration()
-            if let pidStr = queryValue(["pid"], in: components), let pid = Int(pidStr) {
-                config.pid = pid
+            if let pidStr = queryValue(["pid"], in: components), let pid = Int32(pidStr), pid > 0 {
+                config.pid = Int(pid)
             }
             if let bundleId = queryValue(["bundle-id", "bundleID", "bundle_id", "bundleId"], in: components) {
                 config.bundleID = bundleId
